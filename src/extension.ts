@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
+import sizeOf from 'image-size';
+import { assert } from 'console';
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Congratulations, your extension "imageslider" is now active!');
-
 	const disposable = vscode.commands.registerCommand('imageslider.SliderCompare', async (contextSelection: vscode.Uri, allSelections: vscode.Uri[])  => {
 
 		if (allSelections.length !== 2) {
@@ -11,6 +11,15 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 		const left_image = allSelections[0];
 		const right_image = allSelections[1];
+
+		const leftImageSize = sizeOf(left_image.fsPath);
+		const rightImageSize = sizeOf(right_image.fsPath);
+		
+
+		if (leftImageSize.width !== rightImageSize.width || leftImageSize.height !== rightImageSize.height) {
+			vscode.window.showErrorMessage('Images must have the same dimensions to be compared.');
+			return;
+		}
 		
 		displayImageSlider(left_image, right_image);
 	});
@@ -35,53 +44,77 @@ function displayImageSlider(left_image: vscode.Uri, right_image: vscode.Uri) {
 }
 
 function getWebviewContent(left_image_src: vscode.Uri, right_image_src: vscode.Uri) {
-    return `<!DOCTYPE html>
-			<html lang="en">
-			<head>
-				<meta charset="UTF-8">
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				
-				<title>Image comparison slider</title>
-				<style>
-					:root {
-						--slider-value: 50%;
-					}
-					.view {
-						position: relative;
-						width: 100%;
-						height: 100vh;
-						display: flex;
-            			justify-content: center;
-						align-items: center;
-					}
-					img {
-                        position: absolute;
-						object-fit: cover;
-                    }
-					.slider {
-						position: absolute;
-						width: 100%;
-						height: 100%;
-						appearance: none;
-						opacity: 0;
-						outline: none; 
-					}
-				</style>
-			</head>
-			<body>
-				<div class="view">
-					<img src="${left_image_src}" style="clip-path: inset(0 calc(100% - var(--slider-value)) 0 0);" />
-					<img src="${right_image_src}" style="clip-path: inset(0 0 0 var(--slider-value));" />
-					<input type="range" min="0" max="100" value="50" class="slider" id="myRange" oninput="adjustSlider(this.value)" />
-				</div>
-			</body>
+    return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Image comparison slider</title>
+	<style>
+		:root {
+			--slider-value: 50%;
+		}
+		.view {
+			position: relative;
+			width: 100%;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		img {
+			position: absolute;
+		}
+		.slider {
+			position: absolute;
+			-webkit-appearance: none;
+			appearance: none;
+			width: 100%;
+			height: 100%;
+			background-color:rgba(0,0,0,0);
+			outline: none;
+			opacity: 1;
+		}
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 3px;
+			height: 100vh; 
+			background: white;
+			cursor: pointer;
+		}
 
-			<script>
-				function adjustSlider(value) {
-					document.documentElement.style.setProperty('--slider-value', value + '%');
-				}
-    		</script>
-			</html>`;
+	</style>
+</head>
+<body>
+	<div class="view">
+		<img id="left-img" src="${left_image_src}" style="clip-path: inset(0 calc(100% - var(--slider-value)) 0 0);" />
+		<img id="right-img" src="${right_image_src}" style="clip-path: inset(0 0 0 var(--slider-value));" />
+		<input type="range" min="0" max="100" value="50" class="slider" id="myRange" oninput="adjustSlider(this.value)"/>
+	</div>
+</body>
+
+<script>
+	const slider = document.getElementById("myRange");
+	const rightImage = document.getElementById("right-img");
+
+	function adjustSlider(value) {
+		document.documentElement.style.setProperty('--slider-value', value + '%');
+	};
+
+	window.addEventListener('load', function() {
+        adjustSliderWidth();
+        window.addEventListener('resize', adjustSliderWidth);
+    });
+
+	function adjustSliderWidth(value) {
+		slider.style.width = rightImage.offsetWidth + 'px';
+		slider.style.height = rightImage.offsetHeight + 'px';
+	};
+</script>
+</html>`;
 }
 
 exports.activate = activate;
