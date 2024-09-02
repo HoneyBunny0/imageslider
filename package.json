@@ -2,6 +2,8 @@
   "name": "imageslider",
   "displayName": "ImageComparisonSlider",
   "description": "Compare images with a slider in VS Code",
+  "icon": "images/icon.png",
+  "publisher": "paulmesseant",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.92.0"
