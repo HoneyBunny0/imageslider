@@ -66,14 +66,6 @@ function getWebviewContent(left_image_src: vscode.Uri, right_image_src: vscode.U
 						opacity: 0;
 						outline: none; 
 					}
-
-					#slider-value-display {
-						position: absolute;
-						top: 60%;
-						width: 100%;
-						text-align: center;
-						z-index: 2;
-					}
 				</style>
 			</head>
 			<body>
