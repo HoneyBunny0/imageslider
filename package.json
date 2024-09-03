@@ -1,15 +1,25 @@
 {
   "name": "imageslider",
-  "displayName": "ImageComparisonSlider",
+  "displayName": "Image Comparison Slider",
   "description": "Compare images with a slider window directly in VS Code",
   "icon": "extension/images/icon.png",
   "publisher": "PaulMesseant",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.92.0"
   },
   "categories": [
+    "Visualization",
+    "Data Science",
+    "Machine Learning",
     "Other"
+  ],
+  "keywords": [
+    "Image",
+    "Slider",
+    "Compare",
+    "Comparison",
+    "Images"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
