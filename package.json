@@ -1,9 +1,9 @@
 {
   "name": "imageslider",
   "displayName": "ImageComparisonSlider",
-  "description": "Compare images with a slider in VS Code",
-  "icon": "images/icon.png",
-  "publisher": "paul-messeant",
+  "description": "Compare images with a slider window directly in VS Code",
+  "icon": "extension/images/icon.png",
+  "publisher": "PaulMesseant",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.92.0"
@@ -56,5 +56,6 @@
     "type": "git",
     "url": "https://github.com/HoneyBunny0/imageslider.git"
   },
-  "homepage": "https://github.com/HoneyBunny0/imageslider/blob/master/README.md"
+  "homepage": "https://github.com/HoneyBunny0/imageslider/blob/master/README.md",
+  "pricing": "Free"
 }
