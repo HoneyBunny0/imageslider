@@ -66,6 +66,8 @@ function getWebviewContent(left_image_src: vscode.Uri, right_image_src: vscode.U
 		}
 		img {
 			position: absolute;
+			top: 0;
+            height: 100%;
 		}
 		.slider {
 			position: absolute;
@@ -105,13 +107,12 @@ function getWebviewContent(left_image_src: vscode.Uri, right_image_src: vscode.U
 	};
 
 	window.addEventListener('load', function() {
-        adjustSliderWidth();
-        window.addEventListener('resize', adjustSliderWidth);
+        adjustSliderSize();
+        window.addEventListener('resize', adjustSliderSize);
     });
 
-	function adjustSliderWidth(value) {
+	function adjustSliderSize(value) {
 		slider.style.width = rightImage.offsetWidth + 'px';
-		slider.style.height = rightImage.offsetHeight + 'px';
 	};
 </script>
 </html>`;
