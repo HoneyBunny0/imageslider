@@ -86,6 +86,11 @@ function getWebviewContent(left_image_src: vscode.Uri, right_image_src: vscode.U
 			height: 100vh; 
 			background: white;
 			cursor: pointer;
+			outline: none;
+		}
+		.slider:focus {
+			outline: 0;
+			outline: none;
 		}
 
 	</style>
