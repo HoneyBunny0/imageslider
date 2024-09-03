@@ -4,7 +4,7 @@
   "description": "Compare images with a slider window directly in VS Code",
   "icon": "extension/images/icon.png",
   "publisher": "PaulMesseant",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.92.0"
   },
