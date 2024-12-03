@@ -6,6 +6,6 @@ Effortlessly compare two images side-by-side with a sleek, interactive slider. P
 
 - In the explorer window, select exactly two images (png, jpg or jpeg)
 - right-click
-- select `Compare images`
+- select `SliderCompare images`
 
 **Enjoy!**
