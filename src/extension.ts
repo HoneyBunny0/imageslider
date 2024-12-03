@@ -14,6 +14,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 		const leftImageSize = sizeOf(left_image.fsPath);
 		const rightImageSize = sizeOf(right_image.fsPath);
+
+		vscode.window.showInformationMessage(`Left image: ${leftImageSize.width}x${leftImageSize.height}, Right image: ${rightImageSize.width}x${rightImageSize.height}`);
 		
 
 		if (leftImageSize.width !== rightImageSize.width || leftImageSize.height !== rightImageSize.height) {
@@ -41,6 +43,7 @@ function displayImageSlider(left_image: vscode.Uri, right_image: vscode.Uri) {
 	const right_image_src = panel.webview.asWebviewUri(right_image);
 
     panel.webview.html = getWebviewContent(left_image_src, right_image_src);
+	console.log(panel.webview.html);
 }
 
 function getWebviewContent(left_image_src: vscode.Uri, right_image_src: vscode.Uri) {

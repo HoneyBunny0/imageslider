@@ -4,7 +4,7 @@
   "description": "Compare images with a slider window directly in VS Code",
   "icon": "extension/images/icon.png",
   "publisher": "PaulMesseant",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.92.0"
   },
@@ -27,14 +27,14 @@
     "commands": [
       {
         "command": "imageslider.SliderCompare",
-        "title": "Compare images"
+        "title": "SliderCompare Images"
       }
     ],
     "menus": {
       "explorer/context": [
         {
           "command": "imageslider.SliderCompare",
-          "when": "resourceExtname == .png || resourceExtname == .jpg || resourceExtname == .jpeg",
+          "when": "resourceExtname == .png || resourceExtname == .jpg || resourceExtname == .jpeg || resourceExtname == .PNG || resourceExtname == .JPG || resourceExtname == .JPEG",
           "group": "navigation"
         }
       ]
